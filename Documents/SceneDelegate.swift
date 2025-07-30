@@ -15,11 +15,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let documentVC = DocumentsViewController()
-        let navigationController = UINavigationController(rootViewController: documentVC)
-        navigationController.navigationBar.prefersLargeTitles = true
-        documentVC.navigationItem.title = "Documents"
-        window?.rootViewController = navigationController
+        let securityVC = SecurityViewController()
+        window?.rootViewController = securityVC
         window?.makeKeyAndVisible()
     }
 }

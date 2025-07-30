@@ -9,11 +9,15 @@ import UIKit
 
 struct DocumentsManager {
     
+    private let userSettings = UserSettings.shared
     private let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-
+    
     var documents: [String] {
         let urls = try? FileManager.default.contentsOfDirectory(at: documentsUrl, includingPropertiesForKeys: nil)
-        return urls?.map { $0.lastPathComponent } ?? []
+        return urls?
+            .map { $0.lastPathComponent }
+            .sorted { userSettings.isAscendingSort() ? $0 < $1 : $0 > $1 }
+        ?? []
     }
     
     func saveImage(_ image: UIImage) {
